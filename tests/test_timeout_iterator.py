@@ -1,7 +1,7 @@
 import unittest
 import time
 
-from iterator import TimeoutIterator
+from iterators import TimeoutIterator
 
 def iter_simple():
     yield 1

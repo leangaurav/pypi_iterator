@@ -4,7 +4,8 @@ with open("README.md", "r") as fh:
     long_description = fh.read()
 
 setuptools.setup(
-    name="leangaurav",
+    name="iterators",
+    packages = ['iterators'], 
     version="0.0.1",
     author="leangaurav",
     author_email="leangaurav.me@gmail.com",
@@ -14,7 +15,6 @@ setuptools.setup(
     url="https://github.com/leangaurav/pypi_iterator",
     download_url="https://github.com/leangaurav/pypi_iterator/archive/v_0.0.1.tar.gz",
     keywords = ['ITERATOR', 'TIMEOUT', 'SYNC'],
-    packages=setuptools.find_packages(),
     classifiers=[
         "Programming Language :: Python :: 3",
         "License :: OSI Approved :: MIT License",
