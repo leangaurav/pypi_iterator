@@ -12,12 +12,14 @@ setuptools.setup(
     long_description=long_description,
     long_description_content_type="text/markdown",
     url="https://github.com/leangaurav/pypi_iterator",
+    download_url="https://github.com/leangaurav/pypi_iterator/archive/v_0.0.1.tar.gz",
+    keywords = ['ITERATOR', 'TIMEOUT', 'SYNC'],
     packages=setuptools.find_packages(),
     classifiers=[
         "Programming Language :: Python :: 3",
         "License :: OSI Approved :: MIT License",
         "Operating System :: OS Independent",
-        "Software Development :: Libraries :: Python Modules",
+        "Topic :: Software Development :: Libraries :: Python Modules",
     ],
     python_requires='>=3.6',
 )
