@@ -2,7 +2,7 @@ Provides a wrapper class TimeoutIterator to add timeout feature to normal iterat
 
 ### Installation:
 
-    pip intall iterator
+    pip intall iterators
 
 
 See help of TimeoutIterator for all the features. Check tests for examples on how to use TimeoutIterator.
@@ -13,6 +13,8 @@ See example tests below for basic  usage
 1. TimeoutIterator works like normal iterator:
 
     ```
+    from iterators import TimeoutIterator
+
     def iter_simple():
         yield 1
         yield 2
