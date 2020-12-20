@@ -24,6 +24,13 @@ jobs:
         pip install setuptools wheel twine
     - name: Update Version in Setup.py
       run: |
-        sed -i 's/v_0.0.1/${{ github.event.release.tag_name }}/g' setup.py
+        sed -i 's/release_tag/${{ github.event.release.tag_name }}/g' setup.py
         cat setup.py
-        
+
+    - name: Build and publish
+      env:
+        TWINE_USERNAME: ${{ secrets.PYPI_USERNAME }}
+        TWINE_PASSWORD: ${{ secrets.PYPI_PASSWORD }}
+      run: |
+        python setup.py sdist bdist_wheel
+        twine upload dist/*
