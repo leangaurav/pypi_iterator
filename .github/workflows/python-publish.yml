@@ -24,6 +24,9 @@ jobs:
         pip install setuptools wheel twine
     - name: Update Version in Setup.py
       run: |
+        release_version=${{ github.event.release.tag_name }}
+        release_version=${release_version:2}
+        sed -i "s/release_version/$release_version/g" setup.py
         sed -i 's/release_tag/${{ github.event.release.tag_name }}/g' setup.py
         cat setup.py
 
