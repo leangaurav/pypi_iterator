@@ -84,7 +84,7 @@ class TestTimeoutIterator(unittest.TestCase):
 
     def test_function_set_reset_on_next(self):
         i = iter_with_sleep()
-        it = TimeoutIterator(i, timeout=0.3, reset_on_next=False)
+        it = TimeoutIterator(i, timeout=0.35, reset_on_next=False)
         self.assertEqual(next(it), 1)
         self.assertEqual(next(it), it.get_sentinel())
         it.set_reset_on_next(True)
