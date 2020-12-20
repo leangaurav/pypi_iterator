@@ -40,13 +40,13 @@ class TestTimeoutIterator(unittest.TestCase):
         self.assertEqual(next(it), 3)
         self.assertRaises(StopIteration, next, it)
         self.assertRaises(StopIteration, next, it)
-        
+
     def test_fixed_timeout(self):
         i = iter_with_sleep()
         it = TimeoutIterator(i, timeout=0.5)
         self.assertEqual(next(it), 1)
         self.assertEqual(next(it), it.get_sentinel())
-        
+
         self.assertEqual(next(it), 2)
         self.assertEqual(next(it), 3)
         self.assertRaises(StopIteration, next, it)
@@ -56,7 +56,7 @@ class TestTimeoutIterator(unittest.TestCase):
         it = TimeoutIterator(i, timeout=0.5)
         self.assertEqual(next(it), 1)
         self.assertEqual(next(it), it.get_sentinel())
-        
+
         it.set_timeout(0.3)
         self.assertEqual(next(it), 2)
         self.assertEqual(next(it), it.get_sentinel())
@@ -69,15 +69,25 @@ class TestTimeoutIterator(unittest.TestCase):
         it = TimeoutIterator(i, timeout=0.5, sentinel="END")
         self.assertEqual(next(it), 1)
         self.assertEqual(next(it), "END")
-        
+
         self.assertEqual(next(it), 2)
         self.assertEqual(next(it), 3)
         self.assertRaises(StopIteration, next, it)
 
     def test_feature_timeout_reset(self):
         i = iter_with_sleep()
-        it = TimeoutIterator(i, timeout=0.5, timeout_reset=True)
+        it = TimeoutIterator(i, timeout=0.5, reset_on_next=True)
         self.assertEqual(next(it), 1) # timeout gets reset after first iteration
+        self.assertEqual(next(it), 2)
+        self.assertEqual(next(it), 3)
+        self.assertRaises(StopIteration, next, it)
+
+    def test_function_set_reset_on_next(self):
+        i = iter_with_sleep()
+        it = TimeoutIterator(i, timeout=0.3, reset_on_next=False)
+        self.assertEqual(next(it), 1)
+        self.assertEqual(next(it), it.get_sentinel())
+        it.set_reset_on_next(True)
         self.assertEqual(next(it), 2)
         self.assertEqual(next(it), 3)
         self.assertRaises(StopIteration, next, it)
@@ -88,4 +98,14 @@ class TestTimeoutIterator(unittest.TestCase):
         self.assertEqual(next(it), 1)
         self.assertEqual(next(it), 2)
         self.assertRaises(Exception, next, it)
+        self.assertRaises(StopIteration, next, it)
+
+
+    def test_interrupt_thread(self):
+        i = iter_with_sleep()
+        it = TimeoutIterator(i, timeout=0.5, sentinel="END")
+        self.assertEqual(next(it), 1)
+        self.assertEqual(next(it), it.get_sentinel())
+        it.interrupt()
+        self.assertEqual(next(it), 2)
         self.assertRaises(StopIteration, next, it)
