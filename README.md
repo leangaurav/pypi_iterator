@@ -1,3 +1,5 @@
+![Build](https://github.com/leangaurav/pypi_iterator/actions/workflows/python-package.yml/badge.svg?branch=main&event=push)
+
 Provides a wrapper class TimeoutIterator to add timeout feature to normal iterators
 
 ### Installation:
