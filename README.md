@@ -6,7 +6,7 @@ Provides a wrapper class TimeoutIterator to add timeout feature to normal iterat
 
 ### Installation:
 
-    pip intall iterators
+    pip install iterators
 
 
 See help of TimeoutIterator for all the features. Check tests for examples on how to use TimeoutIterator.
