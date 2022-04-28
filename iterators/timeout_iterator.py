@@ -71,7 +71,7 @@ class TimeoutIterator:
         except queue.Empty:
             pass
         finally:
-            # see if tiemout needs to be reset
+            # see if timeout needs to be reset
             if self._reset_on_next:
                 self._timeout = self.ZERO_TIMEOUT
 
