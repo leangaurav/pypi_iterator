@@ -1,3 +1,3 @@
-from .timeout_iterator import TimeoutIterator
+from .timeout_iterator import TimeoutIterator, AsyncTimeoutIterator
 
-__all__ = ["TimeoutIterator"]
+__all__ = ["TimeoutIterator", "AsyncTimeoutIterator"]
