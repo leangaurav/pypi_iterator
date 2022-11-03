@@ -43,6 +43,18 @@ class TestTimeoutIterator(unittest.TestCase):
 
         asyncio.get_event_loop().run_until_complete(_(self))
 
+    def test_normal_iteration_for_loop(self):
+
+        async def _(self):
+
+            i = iter_simple()
+            it = AsyncTimeoutIterator(i)
+            iterResults = []
+            async for x in it: 
+                iterResults.append(x)        
+            self.assertEqual(iterResults, [1,2])
+
+        asyncio.get_event_loop().run_until_complete(_(self))
 
     def test_timeout_block(self):
 
@@ -60,6 +72,18 @@ class TestTimeoutIterator(unittest.TestCase):
 
         asyncio.get_event_loop().run_until_complete(_(self))
 
+    def test_timeout_block_for_loop(self):
+
+        async def _(self):
+            i = iter_with_sleep()
+            it = AsyncTimeoutIterator(i)
+            iterResults = []
+            async for x in it: 
+                iterResults.append(x)        
+            self.assertEqual(iterResults, [1,2,3])
+
+        asyncio.get_event_loop().run_until_complete(_(self))
+
     def test_fixed_timeout(self):
 
         async def _(self):
@@ -72,6 +96,18 @@ class TestTimeoutIterator(unittest.TestCase):
             self.assertEqual(await it.__anext__(), 3)
             with self.assertRaises(StopAsyncIteration):
                 await it.__anext__()
+        asyncio.get_event_loop().run_until_complete(_(self))
+        
+    def test_fixed_timeout(self):
+
+        async def _(self):
+            i = iter_with_sleep()
+            it = AsyncTimeoutIterator(i, timeout=0.5)
+            iterResults = []
+            async for x in it: 
+                iterResults.append(x)        
+            self.assertEqual(iterResults, [1,it.get_sentinel(),2,3])
+                
         asyncio.get_event_loop().run_until_complete(_(self))
 
     def test_timeout_update(self):
