@@ -32,6 +32,15 @@ class TestTimeoutIterator(unittest.TestCase):
         self.assertRaises(StopIteration, next, it)
         self.assertRaises(StopIteration, next, it)
 
+
+    def test_normal_iteration_for_loop(self):
+        i = iter_simple()
+        it = TimeoutIterator(i)
+        iterResults = []
+        for x in it: 
+            iterResults.append(x)        
+        self.assertEqual(iterResults, [1,2])
+
     def test_timeout_block(self):
         i = iter_with_sleep()
         it = TimeoutIterator(i)
@@ -41,6 +50,14 @@ class TestTimeoutIterator(unittest.TestCase):
         self.assertRaises(StopIteration, next, it)
         self.assertRaises(StopIteration, next, it)
 
+    def test_timeout_block_for_loop(self):
+        i = iter_with_sleep()
+        it = TimeoutIterator(i)        
+        iterResults = []
+        for x in it: 
+            iterResults.append(x)            
+        self.assertEqual(iterResults, [1,2,3])
+    
     def test_fixed_timeout(self):
         i = iter_with_sleep()
         it = TimeoutIterator(i, timeout=0.5)
@@ -50,6 +67,14 @@ class TestTimeoutIterator(unittest.TestCase):
         self.assertEqual(next(it), 2)
         self.assertEqual(next(it), 3)
         self.assertRaises(StopIteration, next, it)
+
+    def test_fixed_timeout_for_loop(self):
+        i = iter_with_sleep()
+        it = TimeoutIterator(i, timeout=0.5)        
+        iterResults = []
+        for x in it: 
+            iterResults.append(x)            
+        self.assertEqual(iterResults, [1,it.get_sentinel(),2,3])
 
     def test_timeout_update(self):
         i = iter_with_sleep()
