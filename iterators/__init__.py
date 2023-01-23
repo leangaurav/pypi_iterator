@@ -1,4 +1,4 @@
 from .timeout_iterator import TimeoutIterator, AsyncTimeoutIterator
-from .queue_to_iterator import IteratorPipe
+from .iterator_pipe import IteratorPipe, AsyncIteratorPipe
 
-__all__ = ["TimeoutIterator", "AsyncTimeoutIterator, IteratorPipe"]
+__all__ = ["TimeoutIterator", "AsyncTimeoutIterator", "IteratorPipe", "AsyncIteratorPipe"]
