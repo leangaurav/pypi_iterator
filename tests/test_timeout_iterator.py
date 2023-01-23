@@ -37,8 +37,8 @@ class TestTimeoutIterator(unittest.TestCase):
         i = iter_simple()
         it = TimeoutIterator(i)
         iterResults = []
-        for x in it: 
-            iterResults.append(x)        
+        for x in it:
+            iterResults.append(x)
         self.assertEqual(iterResults, [1,2])
 
     def test_timeout_block(self):
@@ -52,12 +52,12 @@ class TestTimeoutIterator(unittest.TestCase):
 
     def test_timeout_block_for_loop(self):
         i = iter_with_sleep()
-        it = TimeoutIterator(i)        
+        it = TimeoutIterator(i)
         iterResults = []
-        for x in it: 
-            iterResults.append(x)            
+        for x in it:
+            iterResults.append(x)
         self.assertEqual(iterResults, [1,2,3])
-    
+
     def test_fixed_timeout(self):
         i = iter_with_sleep()
         it = TimeoutIterator(i, timeout=0.5)
@@ -70,10 +70,10 @@ class TestTimeoutIterator(unittest.TestCase):
 
     def test_fixed_timeout_for_loop(self):
         i = iter_with_sleep()
-        it = TimeoutIterator(i, timeout=0.5)        
+        it = TimeoutIterator(i, timeout=0.5)
         iterResults = []
-        for x in it: 
-            iterResults.append(x)            
+        for x in it:
+            iterResults.append(x)
         self.assertEqual(iterResults, [1,it.get_sentinel(),2,3])
 
     def test_timeout_update(self):
